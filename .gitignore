@@ -1,0 +1,4 @@
+backend/src/main/resources/application.properties
+backend/.idea/*
+backend/.idea
+test_frontend/config.js
