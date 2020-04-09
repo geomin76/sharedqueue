@@ -1,3 +1,4 @@
 function myFunction() {
-    alert("Hello!");
+    var x = document.getElementById("mySearch").innerHTML;
+    alert(x);
 }

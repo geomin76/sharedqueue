@@ -8,17 +8,9 @@
                 <div class="col-xl-12 col-lg-12 col-md-12">
                     <div class="jumbotron">
                         <h1>Sample!</h1>
-                        <script>
-                            fetch('http://localhost:3000/token')
-                            .then((response) => {
-                                return response.json();
-                            })
-                            .then((data) => {
-                                console.log(data.token);
-                            });
-                        </script>
-                        <button onclick="myFunction()">Click!</button>
                     </div>
+                    <input type="search" id="mySearch">
+                    <button onclick=myFunction()>Search</button>
                 </div>
             </div>
         </div>

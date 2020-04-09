@@ -5,6 +5,7 @@ var config = require('./config.js');
 var cors = require('cors');
 var querystring = require('querystring');
 var cookieParser = require('cookie-parser');
+const fetch = require('node-fetch');
 
 var access_token = "";
 var refresh_token = "";
@@ -78,9 +79,9 @@ app.get('/callback', function(req, res) {
             if (response.statusCode === 200) {
                 refresh_token = body.refresh_token;
                 access_token = body.access_token;
-                // res.redirect('http://localhost:3000/hello');
+                res.redirect('http://localhost:3000/hello');
                 // res.redirect(302, "/index.html");
-                res.sendFile(__dirname + "/works.html");
+                // res.sendFile(__dirname + "/works.html");
             } 
             else {
                 console.log(error);
@@ -94,6 +95,47 @@ app.get('/callback', function(req, res) {
     
   });
 
+  app.get('/search', function(req, res) {
+    var q = req.query.q;
+    var url = 'https://api.spotify.com/v1/search?' + "q=" + encodeURI(q.toString()) + "&type=track&market=US&limit=10"
+    var authOptions = {
+      url: url,
+      headers: {
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+        "Authorization": "Bearer " + access_token
+      },
+      json: true
+    }
+
+    const response = fetch(url, {
+      method: 'GET',
+      mode: 'cors',
+      headers: {
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+        "Authorization": "Bearer " + access_token
+      },
+    })
+    .then(res => res.json())
+    .then(json => {
+      console.log(json);      
+    });
+    res.redirect("http://localhost:3000/hello")
+    // res.end();
+    
+    // request.get(authOptions, function(error, response, body) {
+    //   response.json().then(data => {
+    //     console.log(data);
+    //   })
+    //   // console.log(body);
+    //   // console.log(body.tracks.href);
+    //   
+    // })
+  })
+
+
+
   app.get('/hello', function(req, res) {
     //   console.log(access_token)
       res.send(access_token);
@@ -104,8 +146,7 @@ app.get('/callback', function(req, res) {
   })
 
   app.get('/error', function(req, res) {
-    //   console.log(access_token)
-      res.send(access_token);
+    res.send("error");
   });
 
 
