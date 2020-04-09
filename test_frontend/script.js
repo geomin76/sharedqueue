@@ -63,3 +63,18 @@ function myFunction() {
         }
     })
 }
+
+function APIhit() {
+    //call localhost, and make a table or list on the right. anytime hit submit, it puts to queue and adds to list on html.
+}
+
+/**
+ * Need to do:
+ * 
+ * Play/Pause
+ * Next (goes down queue)
+ * Previous (do that later)
+ * Options to play songs from the queue
+ * Able to switch queue
+ * Ability to delete from queue
+ */
