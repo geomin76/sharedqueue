@@ -1,5 +1,5 @@
 var token = "";
-var code = "6263%206160";
+var code = "3220%207374";
 
 fetch("http://localhost:3000/token")
 .then((response) => {
@@ -108,11 +108,42 @@ async function getQueue() {
         }
     });
     queue.forEach(element => {
-        console.log(element);
         var node = document.createElement("LI");
         var textnode = document.createTextNode(element);
         node.appendChild(textnode);
         document.getElementById("myQueue").appendChild(node);
+    })
+}
+
+async function startNewSong() {
+    let song = [];
+    await fetch("http://localhost:8080/api/pop?code=" + code, {
+        method: "POST",
+        mode: 'cors',
+        headers: {
+            'Context-Type': 'application/json'
+        }
+    })
+    .then((response) => {
+        return response.json();
+    })
+    .then((data) => {
+        // console.log(data.songId);
+        song[0] = data.songId;
+    })
+    console.log(song[0]);
+    body_content = {
+        "uris": song
+    }
+    fetch("https://api.spotify.com/v1/me/player/play", {
+        method: "PUT",
+        mode: 'cors',
+        headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json",
+            "Authorization": "Bearer " + token
+        },
+        body: JSON.stringify(body_content)
     })
 }
 
