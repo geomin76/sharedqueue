@@ -16,7 +16,7 @@ function Song(name, artist, songId, img) {
     this.img = img;
 }
 
-
+//functionality for anyone
 function myFunction() {
     var songList = [];
     var x = document.getElementById("mySearch").value;
@@ -64,7 +64,7 @@ function myFunction() {
     })
 }
 
-
+//functionality for anyone
 function APIhit() {
     //call localhost, and make a table or list on the right. anytime hit submit, it puts to queue and adds to list on html.
     var e = document.getElementById("select").value;
@@ -87,6 +87,7 @@ function APIhit() {
     console.log(response);
 }
 
+//functionality for anyone
 async function getQueue() {
     let queue = [];
     var node = document.getElementById("LI");
@@ -115,6 +116,7 @@ async function getQueue() {
     })
 }
 
+//functionality only for host
 async function startNewSong() {
     let song = [];
     await fetch("http://localhost:8080/api/pop?code=" + code, {
@@ -144,6 +146,30 @@ async function startNewSong() {
             "Authorization": "Bearer " + token
         },
         body: JSON.stringify(body_content)
+    })
+}
+
+function play() {
+    fetch("https://api.spotify.com/v1/me/player/play", {
+        method: "PUT",
+        mode: 'cors',
+        headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json",
+            "Authorization": "Bearer " + token
+        },
+    })
+}
+
+function pause() {
+    fetch("https://api.spotify.com/v1/me/player/pause", {
+        method: "PUT",
+        mode: 'cors',
+        headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json",
+            "Authorization": "Bearer " + token
+        },
     })
 }
 
