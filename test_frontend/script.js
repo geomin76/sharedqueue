@@ -16,7 +16,6 @@ function Song(name, artist, songId, img) {
 }
 
 
-
 function myFunction() {
     var songList = [];
     var x = document.getElementById("mySearch").value;
@@ -66,6 +65,24 @@ function myFunction() {
 
 function APIhit() {
     //call localhost, and make a table or list on the right. anytime hit submit, it puts to queue and adds to list on html.
+    var results = document.getElementById("select");
+    var result = results.options[e.selectedIndex].value;
+    // console.log(result);
+    data = {
+        "name": result,
+        "songId": result,
+        "suggestedBy": result,
+        "photoCover": result
+    }
+    const response = fetch("http://localhost:8080/api/addToQueue?code=6263%206160", {
+        method: "POST",
+        mode: 'cors',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    });
+    alert(response);
 }
 
 /**
