@@ -44,7 +44,7 @@ function myFunction() {
             for (var i = 0; i < 10; i++) {
                 var el = document.createElement("option");
                 el.text = songList[i].name;
-                el.value = songList[i].name;
+                el.value = songList[i].name+"|"+songList[i].artist+"|"+songList[i].songId+"|"+songList[i].img;
                 select.add(el);
             }
         }
@@ -56,23 +56,23 @@ function myFunction() {
             for (var i = 0; i < 10; i++) {
                 var el = document.createElement("option");
                 el.text = songList[i].name;
-                el.value = songList[i].name;
+                el.value = songList[i].name+"|"+songList[i].artist+"|"+songList[i].songId+"|"+songList[i].img;
                 select.add(el);
             }
         }
     })
 }
 
+
 function APIhit() {
     //call localhost, and make a table or list on the right. anytime hit submit, it puts to queue and adds to list on html.
-    var results = document.getElementById("select");
-    var result = results.options[e.selectedIndex].value;
-    // console.log(result);
+    var e = document.getElementById("select").value;
+    var split_string = e.split("|");
     data = {
-        "name": result,
-        "songId": result,
-        "suggestedBy": result,
-        "photoCover": result
+        "name": split_string[0],
+        "songId": split_string[2],
+        "suggestedBy": split_string[1],
+        "photoCover": split_string[3]
     }
     const response = fetch("http://localhost:8080/api/addToQueue?code=6263%206160", {
         method: "POST",
@@ -82,7 +82,8 @@ function APIhit() {
         },
         body: JSON.stringify(data)
     });
-    alert(response);
+    // alert(response);
+    console.log(response);
 }
 
 /**
