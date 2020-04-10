@@ -1,4 +1,5 @@
 var token = "";
+var code = "6263%206160";
 
 fetch("http://localhost:3000/token")
 .then((response) => {
@@ -74,7 +75,7 @@ function APIhit() {
         "suggestedBy": split_string[1],
         "photoCover": split_string[3]
     }
-    const response = fetch("http://localhost:8080/api/addToQueue?code=6263%206160", {
+    const response = fetch("http://localhost:8080/api/addToQueue?code=" + code, {
         method: "POST",
         mode: 'cors',
         headers: {
@@ -84,6 +85,35 @@ function APIhit() {
     });
     // alert(response);
     console.log(response);
+}
+
+async function getQueue() {
+    let queue = [];
+    var node = document.getElementById("LI");
+    const response = await fetch("http://localhost:8080/api/getQueue?code=6263%206160", {
+        method: "GET",
+        mode: 'cors',
+        headers: {
+            'Context-Type': 'application/json'
+        }
+    })
+    .then((response) => {
+        return response.json();
+    })
+    .then((data) => {
+        var count = 0;
+        while (count != data.length) {
+            queue[count] = data[count].name;
+            count++;
+        }
+    });
+    queue.forEach(element => {
+        console.log(element);
+        var node = document.createElement("LI");
+        var textnode = document.createTextNode(element);
+        node.appendChild(textnode);
+        document.getElementById("myQueue").appendChild(node);
+    })
 }
 
 /**
