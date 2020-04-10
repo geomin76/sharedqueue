@@ -1,4 +1,5 @@
 var token = "";
+var code = "6263%206160";
 
 fetch("http://localhost:3000/token")
 .then((response) => {
@@ -44,7 +45,7 @@ function myFunction() {
             for (var i = 0; i < 10; i++) {
                 var el = document.createElement("option");
                 el.text = songList[i].name;
-                el.value = songList[i].name;
+                el.value = songList[i].name+"|"+songList[i].artist+"|"+songList[i].songId+"|"+songList[i].img;
                 select.add(el);
             }
         }
@@ -56,25 +57,25 @@ function myFunction() {
             for (var i = 0; i < 10; i++) {
                 var el = document.createElement("option");
                 el.text = songList[i].name;
-                el.value = songList[i].name;
+                el.value = songList[i].name+"|"+songList[i].artist+"|"+songList[i].songId+"|"+songList[i].img;
                 select.add(el);
             }
         }
     })
 }
 
+
 function APIhit() {
     //call localhost, and make a table or list on the right. anytime hit submit, it puts to queue and adds to list on html.
-    var results = document.getElementById("select");
-    var result = results.options[e.selectedIndex].value;
-    // console.log(result);
+    var e = document.getElementById("select").value;
+    var split_string = e.split("|");
     data = {
-        "name": result,
-        "songId": result,
-        "suggestedBy": result,
-        "photoCover": result
+        "name": split_string[0],
+        "songId": split_string[2],
+        "suggestedBy": split_string[1],
+        "photoCover": split_string[3]
     }
-    const response = fetch("http://localhost:8080/api/addToQueue?code=6263%206160", {
+    const response = fetch("http://localhost:8080/api/addToQueue?code=" + code, {
         method: "POST",
         mode: 'cors',
         headers: {
@@ -82,7 +83,37 @@ function APIhit() {
         },
         body: JSON.stringify(data)
     });
-    alert(response);
+    // alert(response);
+    console.log(response);
+}
+
+async function getQueue() {
+    let queue = [];
+    var node = document.getElementById("LI");
+    const response = await fetch("http://localhost:8080/api/getQueue?code=" + code, {
+        method: "GET",
+        mode: 'cors',
+        headers: {
+            'Context-Type': 'application/json'
+        }
+    })
+    .then((response) => {
+        return response.json();
+    })
+    .then((data) => {
+        var count = 0;
+        while (count != data.length) {
+            queue[count] = data[count].name;
+            count++;
+        }
+    });
+    queue.forEach(element => {
+        console.log(element);
+        var node = document.createElement("LI");
+        var textnode = document.createTextNode(element);
+        node.appendChild(textnode);
+        document.getElementById("myQueue").appendChild(node);
+    })
 }
 
 /**
