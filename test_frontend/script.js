@@ -90,7 +90,7 @@ function APIhit() {
 async function getQueue() {
     let queue = [];
     var node = document.getElementById("LI");
-    const response = await fetch("http://localhost:8080/api/getQueue?code=6263%206160", {
+    const response = await fetch("http://localhost:8080/api/getQueue?code=" + code, {
         method: "GET",
         mode: 'cors',
         headers: {
