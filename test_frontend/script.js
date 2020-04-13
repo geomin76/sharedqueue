@@ -1,5 +1,5 @@
 var token = "";
-var code = "3220%207374";
+var code = "8662%208989";
 
 fetch("http://localhost:3000/token")
 .then((response) => {
@@ -8,6 +8,8 @@ fetch("http://localhost:3000/token")
 .then((data) => {
     token = data.token;
 })
+
+
 
 function Song(name, artist, songId, img) {
     this.name = name;

@@ -93,6 +93,7 @@ app.get('/callback', function(req, res) {
     }
   });
 
+
   // app.get('/search', function(req, res) {
   //   var q = req.query.q;
   //   var url = 'https://api.spotify.com/v1/search?' + "q=" + encodeURI(q.toString()) + "&type=track&market=US&limit=10"
