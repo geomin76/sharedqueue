@@ -13,6 +13,7 @@ import sharedqueue.Embeddable.SearchBody;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.net.URLEncoder;
 
 @RestController
 @CrossOrigin("*")
@@ -25,7 +26,7 @@ public class SpotifyController {
     //search functionality, with query + token
     @GetMapping("/search")
     public StringBuffer search(@RequestBody SearchBody searchBody) throws IOException  {
-        String url = "https://api.spotify.com/v1/search?q=" + searchBody.getQuery() + "&type=track&limit=15";
+        String url = "https://api.spotify.com/v1/search?q=" + URLEncoder.encode(searchBody.getQuery(), "UTF-8") + "&type=track&limit=15";
         HttpClient client = HttpClientBuilder.create().build();
         HttpGet request = new HttpGet(url);
         request.addHeader("Authorization", "Bearer " + searchBody.getToken());
