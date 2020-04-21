@@ -177,10 +177,9 @@ function pause() {
 
 
 window.onSpotifyPlayerAPIReady = () => {
-    temp_token="BQAOGnrvylANfKdYQP7OAwHvUIsxPeD-qQyB5yAfQmqAEtkUIp2J5DBtKu_LkPYG7JUEOY9XND2tZdFo54RB-3wvr-bP7Hj77ytT-pekaHRR6jOCb88RT7Szt_CbGASBPwd9ol7Klfbd-4cpxLwz3YsFjYpsJwG5j5g";
     const player = new Spotify.Player({
       name: 'Fuck you Duncan',
-      getOAuthToken: cb => { cb(temp_token); }
+      getOAuthToken: cb => { cb(token); }
     });
   
     // Error handling
@@ -214,7 +213,7 @@ window.onSpotifyPlayerAPIReady = () => {
      url: "https://api.spotify.com/v1/me/player/play?device_id=" + device_id,
      type: "PUT",
      data: '{"uris": ["spotify:track:42FtumLu2P4Qg5iAbg38zI"]}',
-     beforeSend: function(xhr){xhr.setRequestHeader('Authorization', 'Bearer ' + temp_token );},
+     beforeSend: function(xhr){xhr.setRequestHeader('Authorization', 'Bearer ' + token );},
      success: function(data) { 
        console.log(data)
      }
