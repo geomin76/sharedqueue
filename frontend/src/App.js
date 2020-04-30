@@ -5,9 +5,15 @@ import LoginCallback from './Spotify/LoginCallback.js';
 
 window.onSpotifyWebPlaybackSDKReady = () => {};
 
-export default class App extends Component {
-  state = {
-    userAccessToken: null,
+class App extends Component {
+
+  //figure out how to store token in a better form rather than this.state (JWT?)
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      userAccessToken: null
+    }
   }
 
   componentWillMount() {
@@ -21,6 +27,7 @@ export default class App extends Component {
   }
 
 
+
   render() {
     let {
       userAccessToken
@@ -32,9 +39,12 @@ export default class App extends Component {
         {userAccessToken && 
           <div>
             <h1>Hello, World!</h1>
+            <p>{this.state.userAccessToken}</p>
           </div>
         }
       </div>
     )
   }
 }
+
+export default App;

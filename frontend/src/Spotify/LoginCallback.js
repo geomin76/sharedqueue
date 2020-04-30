@@ -18,11 +18,11 @@ export default (callbacks) => {
       }
   
       // Let us know when the access token expires
-      setTimeout(() => {
-        if (typeof callbacks.onAccessTokenExpiration !== "undefined") {
-          callbacks.onAccessTokenExpiration();
-        }
-      }, hashObj.expires_in * 1000);
+      // setTimeout(() => {
+      //   if (typeof callbacks.onAccessTokenExpiration !== "undefined") {
+      //     callbacks.onAccessTokenExpiration();
+      //   }
+      // }, hashObj.expires_in * 1000);
   
       return hashObj.access_token;
     }
