@@ -3,6 +3,16 @@ import axios from 'axios';
 
 class WebPlayback extends Component {
 
+    constructor(props) {
+        super(props)
+
+        this.state = {
+            device_id: null,
+            paused: false,
+            code: "3567%207481"
+        }
+    }
+
     waitForSpotify() {
         return new Promise(resolve => {
           if ('Spotify' in window) {
@@ -14,7 +24,6 @@ class WebPlayback extends Component {
       }
 
     async play(device_id, song_id) {
-          var uris = '{"uris": ["spotify:track:4jNQkWhuzqrbqQuqanFFJ6"]}';
           var url = "https://api.spotify.com/v1/me/player/play?device_id=" + device_id
         fetch(url, {
             method: "PUT",
@@ -25,6 +34,21 @@ class WebPlayback extends Component {
             }
         })
       }
+
+    async pop() {
+    var url = "http://localhost:8080/api/pop?code=" + this.state.code
+    fetch(url, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log(data.name)
+        this.play(this.state.device_id, data.songId);
+    });
+    }
 
     async setupWebPlaybackEvents() {
         let { Player } = window.Spotify;
@@ -50,13 +74,32 @@ class WebPlayback extends Component {
         });
 
         this.webPlaybackInstance.on("player_state_changed", async state => {
-            console.log("hello!")
-        });
-      
+            if (this.state && 
+                state.position === 0 && 
+                state.track_window.previous_tracks.find(x => x.id === state.track_window.current_track.id) && 
+                state.paused &&
+                !this.state.paused) {
+                this.pop();
+                this.setState({
+                    paused: true
+                })
+            }
+            
+            if (!state.paused) {
+                this.setState({
+                    paused: false
+                })
+            }
+           });
+            // change song / position based on state change
 
         this.webPlaybackInstance.on("ready", data => {
             console.log(data.device_id);
+            this.setState({
+                device_id: data.device_id
+            })
             this.play(data.device_id, "spotify:track:4jNQkWhuzqrbqQuqanFFJ6")
+            // pop first element
         })
 
         this.webPlaybackInstance.connect();

@@ -34,6 +34,8 @@ class App extends Component {
       userAccessToken
     } = this.state
 
+    // search + push functionality
+
     return(
       <div className="App">
         {!userAccessToken && <Intro/>}
