@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import './App.css';
 import Intro from './Screens/Intro.js';
 import LoginCallback from './Spotify/LoginCallback.js';
+import WebPlayback from './Spotify/WebPlayback.js';
 
 window.onSpotifyWebPlaybackSDKReady = () => {};
 
@@ -40,6 +41,7 @@ class App extends Component {
           <div>
             <h1>Hello, World!</h1>
             <p>{this.state.userAccessToken}</p>
+            <WebPlayback token={this.state.userAccessToken} />
           </div>
         }
       </div>
