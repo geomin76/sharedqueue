@@ -2,4 +2,4 @@ backend/src/main/resources/application.properties
 backend/.idea/*
 backend/.idea
 test_frontend/config.js
-frontend/Spotify/secrets.js
+frontend/src/Spotify/secrets.js
