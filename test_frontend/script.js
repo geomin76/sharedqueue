@@ -1,5 +1,6 @@
-var token = "";
-var code = "8662%208989";
+// var token = "BQBfRslB2UNsjP5Wn71q0Zppwf_-WUBNMhY96-s1b_kIWpPpLD6kaw_2kxVeNslAb8q8q_B8GC7ZJuyRxwVOoNlatUmDK3j7NUVEwTF9tnIkCLmGACcMXCm83CcE2khuZls_EdcG4icBseXOj2L-sOL6PdH4Qz6GOm4";
+var token = ""
+var code = "987%201490";
 
 fetch("http://localhost:3000/token")
 .then((response) => {
@@ -8,6 +9,7 @@ fetch("http://localhost:3000/token")
 .then((data) => {
     token = data.token;
 })
+
 
 
 
@@ -86,7 +88,7 @@ function APIhit() {
         body: JSON.stringify(data)
     });
     // alert(response);
-    console.log(response);
+    // console.log(response);
 }
 
 //functionality for anyone
@@ -132,10 +134,10 @@ async function startNewSong() {
         return response.json();
     })
     .then((data) => {
-        // console.log(data.songId);
+        console.log(data.songId);
         song[0] = data.songId;
     })
-    console.log(song[0]);
+    // return song[0];
     body_content = {
         "uris": song
     }
@@ -190,17 +192,26 @@ window.onSpotifyPlayerAPIReady = () => {
   
     // Playback status updates
     player.on('player_state_changed', state => {
-      console.log(state)
-      $('#current-track').attr('src', state.track_window.current_track.album.images[0].url);
-      $('#current-track-name').text(state.track_window.current_track.name);
+        // console.log(state);
+        if(state.paused && state.position === 0 && state.restrictions.disallow_resuming_reasons &&
+            state.restrictions.disallow_resuming_reasons[0] === "not_paused"){
+            console.log("finished");
+            startNewSong()
+            // play("a8e1ed7914db719cd38d27e4a3bc3d622018d21d", startNewSong())
+            // console.log(startNewSong())
+       }
+        $('#current-track').attr('src', state.track_window.current_track.album.images[0].url);
+        $('#current-track-name').text(state.track_window.current_track.name);
     });
+
   
     // Ready
     player.on('ready', data => {
       console.log('Ready with Device ID', data.device_id);
       
       // Play a track using our new device ID
-      play(data.device_id);
+      play(data.device_id, "spotify:track:0UJEym12sdx3m5UlY2HYfp");
+    //   console.log(data.device_id);
     });
   
     // Connect to the player!
@@ -208,13 +219,14 @@ window.onSpotifyPlayerAPIReady = () => {
   }
   
   // Play a specified track on the Web Playback SDK's device ID
-  function play(device_id) {
+  function play(device_id, song_id) {
     $.ajax({
      url: "https://api.spotify.com/v1/me/player/play?device_id=" + device_id,
      type: "PUT",
-     data: '{"uris": ["spotify:track:42FtumLu2P4Qg5iAbg38zI"]}',
+    //  data: '{"uris": ["spotify:track:42FtumLu2P4Qg5iAbg38zI"]}',
+    data: '{"uris": ["' + song_id.toString() + '"]}',
      beforeSend: function(xhr){xhr.setRequestHeader('Authorization', 'Bearer ' + token );},
-     success: function(data) { 
+     success: function(data) {
        console.log(data)
      }
     });
