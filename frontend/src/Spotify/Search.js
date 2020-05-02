@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import axios from "axios"
+import Songs from '../Object/Songs.js';
 
 class Search extends Component {
     
@@ -32,7 +33,12 @@ class Search extends Component {
             }
         })
         .then(res => {
-            console.log(res.data);
+            // const query = res.data.tracks.items;
+            // console.log(Array.from(res.data.tracks.items));
+            const query = Array.from(res.data.tracks.items);
+            
+            this.setState({query, loading: false})
+            // console.log(this.state.query);
         })
         .catch((error) => {
             console.log(error);
@@ -45,10 +51,22 @@ class Search extends Component {
 			this.setState( { query, results: {}, message: '' } );
 		} else {
 			this.setState( { query, loading: true, message: '' }, () => {
-				this.searchResults(query );
+                this.searchResults(query);
 			} );
 		}
-	};
+    };
+    
+
+    //figure out song obj to store in a list view, with a little option that can add to queue
+    
+    get renderSongs() {
+        let songs = <p>There are no tracks</p>
+        if (this.state.query) {
+            songs = <Songs list={this.state.query}/>
+            // songs = <p>Something is here!</p>
+        }
+        return songs
+    }
 
     render() {
         return (
@@ -62,6 +80,7 @@ class Search extends Component {
                         placeholder="Search..."
                         onChange={this.handleOnInputChange}
                     />
+                    {this.renderSongs}
                     <i className="fa fa-search search-icon" aria-hidden="true"/>
                 </label>
             </div>
