@@ -98,7 +98,7 @@ class WebPlayback extends Component {
             this.setState({
                 device_id: data.device_id
             })
-            this.play(data.device_id, "spotify:track:4jNQkWhuzqrbqQuqanFFJ6")
+            // this.play(data.device_id, "spotify:track:4jNQkWhuzqrbqQuqanFFJ6")
             // pop first element
         })
 

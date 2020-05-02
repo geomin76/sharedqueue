@@ -3,6 +3,7 @@ import './App.css';
 import Intro from './Screens/Intro.js';
 import LoginCallback from './Spotify/LoginCallback.js';
 import WebPlayback from './Spotify/WebPlayback.js';
+import Search from './Spotify/Search.js'
 
 window.onSpotifyWebPlaybackSDKReady = () => {};
 
@@ -42,8 +43,9 @@ class App extends Component {
         {userAccessToken && 
           <div>
             <h1>Hello, World!</h1>
-            <p>{this.state.userAccessToken}</p>
             <WebPlayback token={this.state.userAccessToken} />
+            <br/>
+            <Search token={this.state.userAccessToken}/>
           </div>
         }
       </div>
