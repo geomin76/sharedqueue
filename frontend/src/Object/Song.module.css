@@ -1,0 +1,19 @@
+.Container {
+    width: 500px;
+    height: 250px;
+    border: 3px blue;
+    margin: auto;
+    display: inline-block;
+}
+
+.Image {
+    width: 30%;
+    float: left;
+    display: inline-block;
+}
+
+.Title {
+    text-align: right;
+    vertical-align: center;
+    display: inline-block;
+}

@@ -38,7 +38,7 @@ class Search extends Component {
             const query = Array.from(res.data.tracks.items);
             
             this.setState({query, loading: false})
-            // console.log(this.state.query);
+            console.log(this.state.query);
         })
         .catch((error) => {
             console.log(error);
@@ -80,6 +80,8 @@ class Search extends Component {
                         placeholder="Search..."
                         onChange={this.handleOnInputChange}
                     />
+                    <br></br>
+                    <br></br>
                     {this.renderSongs}
                     <i className="fa fa-search search-icon" aria-hidden="true"/>
                 </label>

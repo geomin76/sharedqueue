@@ -7,7 +7,8 @@ const Songs = ({ list }) => {
     if (list) {
         songs = [];
         for (var i = 0; i < list.length; i++) {
-            songs.push(<Song name={list[i].name}/>)
+            songs.push(<Song items={list[i]}/>)
+            // songs.push(<Song {...list[i]}/>)
         }
     }
 
