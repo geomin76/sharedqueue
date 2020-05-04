@@ -35,7 +35,13 @@ class App extends Component {
       userAccessToken
     } = this.state
 
-    // search + push functionality
+    // show queue on side
+
+    //store token better so no more logging in
+
+    //figure out creating group or joining a queue
+
+    //fix css
 
     return(
       <div className="App">

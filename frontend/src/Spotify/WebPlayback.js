@@ -9,7 +9,7 @@ class WebPlayback extends Component {
         this.state = {
             device_id: null,
             paused: false,
-            code: "3567%207481"
+            code: "9678%204518"
         }
     }
 
@@ -50,6 +50,10 @@ class WebPlayback extends Component {
     });
     }
 
+    //if click next, then get the next song
+
+    //ability to transfer to another device
+    
     async setupWebPlaybackEvents() {
         let { Player } = window.Spotify;
         this.webPlaybackInstance = new Player({
@@ -79,10 +83,10 @@ class WebPlayback extends Component {
                 state.track_window.previous_tracks.find(x => x.id === state.track_window.current_track.id) && 
                 state.paused &&
                 !this.state.paused) {
-                this.pop();
-                this.setState({
-                    paused: true
-                })
+                    this.pop();
+                    this.setState({
+                        paused: true
+                    })
             }
             
             if (!state.paused) {
@@ -99,7 +103,7 @@ class WebPlayback extends Component {
                 device_id: data.device_id
             })
             // this.play(data.device_id, "spotify:track:4jNQkWhuzqrbqQuqanFFJ6")
-            // pop first element
+            this.pop();
         })
 
         this.webPlaybackInstance.connect();
