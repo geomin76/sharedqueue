@@ -9,7 +9,7 @@ class WebPlayback extends Component {
         this.state = {
             device_id: null,
             paused: false,
-            code: "9678%204518"
+            code: "2324%205661"
         }
     }
 
@@ -94,8 +94,13 @@ class WebPlayback extends Component {
                     paused: false
                 })
             }
-           });
-            // change song / position based on state change
+        });
+
+        this.webPlaybackInstance.nextTrack().then(() => {
+            this.pop();
+        })
+
+        // change song / position based on state change
 
         this.webPlaybackInstance.on("ready", data => {
             console.log(data.device_id);
@@ -107,6 +112,10 @@ class WebPlayback extends Component {
         })
 
         this.webPlaybackInstance.connect();
+    }
+
+    nextTrack() {
+        this.pop();
     }
 
     async componentWillMount() {

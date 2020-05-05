@@ -38,10 +38,10 @@ class Search extends Component {
             const query = Array.from(res.data.tracks.items);
             
             this.setState({query, loading: false})
-            console.log(this.state.query);
+            // console.log(this.state.query);
         })
         .catch((error) => {
-            console.log(error);
+            // console.log(error);
         })
     }
 

@@ -4,6 +4,7 @@ import Intro from './Screens/Intro.js';
 import LoginCallback from './Spotify/LoginCallback.js';
 import WebPlayback from './Spotify/WebPlayback.js';
 import Search from './Spotify/Search.js'
+import Queue from './Queue/Queue.js'
 
 window.onSpotifyWebPlaybackSDKReady = () => {};
 
@@ -41,6 +42,8 @@ class App extends Component {
 
     //figure out creating group or joining a queue
 
+    //add a player
+
     //fix css
 
     return(
@@ -52,6 +55,7 @@ class App extends Component {
             <WebPlayback token={this.state.userAccessToken} />
             <br/>
             <Search token={this.state.userAccessToken}/>
+            <Queue/>
           </div>
         }
       </div>

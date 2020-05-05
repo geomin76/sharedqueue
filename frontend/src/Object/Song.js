@@ -3,7 +3,7 @@ import classes from "./Song.module.css"
 
 
 function addToQueue(name, songId, suggestedBy, img) {
-    var url = "http://localhost:8080/api/addToQueue?code=9678%204518"
+    var url = "http://localhost:8080/api/addToQueue?code=2324%205661"
     const data = {
         name: name,
         songId: songId,
@@ -24,7 +24,7 @@ class Song extends Component {
     constructor(props) {
         super(props)
     }
-    
+
 
     toggleButtonState = () => {
         if (this.props.items.album) {
@@ -36,8 +36,6 @@ class Song extends Component {
     }
 
     render() {
-        //figure out song img bug, not loading properly or getting reset, possible if statement inside html
-
         //add a notif that shows it was added to queue
 
         //fix css, make it more list view and add artist and duration
