@@ -23,22 +23,16 @@ function addToQueue(name, songId, suggestedBy, img) {
 class Song extends Component {
     constructor(props) {
         super(props)
-        this.state = {
-            img: "No image available",
-        }
     }
-
-    async componentDidMount() {
-        const { album } = await this.props.items;
-        if (album) {
-            this.setState({
-                img: album.images[0].url
-            })
-        }
-    }
+    
 
     toggleButtonState = () => {
-        addToQueue(this.props.items.name, this.props.items.uri, "Geo", this.state.img)
+        if (this.props.items.album) {
+            addToQueue(this.props.items.name, this.props.items.uri, "Geo", this.props.items.album.images[0].url)
+        }
+        else {
+            addToQueue(this.props.items.name, this.props.items.uri, "Geo", "No image available")
+        }
     }
 
     render() {
@@ -52,9 +46,16 @@ class Song extends Component {
                 <div className={classes.Title}>
                     <p>{this.props.items.name}</p>
                 </div>
-                <div className={classes.Image}>
-                    <img height="200" src={this.state.img}/>
-                </div>
+                {!this.props.items.album && 
+                    <div>
+                        <p>No image available</p>
+                    </div>
+                }
+                {this.props.items.album && 
+                    <div className={classes.Image}>
+                        <img height="200" src={this.props.items.album.images[0].url}/>
+                    </div>
+                }
                 <br></br>
                 <button onClick={this.toggleButtonState}>Add to Queue</button>
             </div>
