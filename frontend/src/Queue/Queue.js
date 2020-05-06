@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import classes from "./Queue.module.css"
 
 class Queue extends Component {
     constructor(props) {
@@ -34,7 +35,7 @@ class Queue extends Component {
 
     render() {
         return (
-            <div>
+            <div className={classes.QueueContainer}>
                 <ul>
                     {!this.state.items && 
                     <div>

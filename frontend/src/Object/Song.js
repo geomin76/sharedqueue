@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import classes from "./Song.module.css"
+import { NotificationManager } from 'react-notifications'
 
 
 function addToQueue(name, songId, suggestedBy, img) {
@@ -33,6 +34,7 @@ class Song extends Component {
         else {
             addToQueue(this.props.items.name, this.props.items.uri, "Geo", "No image available")
         }
+        NotificationManager.success('Track added to queue!', 'Successful!', 2000);
     }
 
     render() {

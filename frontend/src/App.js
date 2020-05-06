@@ -1,10 +1,14 @@
 import React, {Component} from 'react';
 import './App.css';
+
 import Intro from './Screens/Intro.js';
 import LoginCallback from './Spotify/LoginCallback.js';
 import WebPlayback from './Spotify/WebPlayback.js';
 import Search from './Spotify/Search.js'
 import Queue from './Queue/Queue.js'
+
+import 'react-notifications/lib/notifications.css';
+import { NotificationContainer } from 'react-notifications';
 
 window.onSpotifyWebPlaybackSDKReady = () => {};
 
@@ -33,7 +37,7 @@ class App extends Component {
 
   render() {
     let {
-      userAccessToken
+      userAccessToken,
     } = this.state
 
     // show queue on side
@@ -51,11 +55,12 @@ class App extends Component {
         {!userAccessToken && <Intro/>}
         {userAccessToken && 
           <div>
-            <h1>Hello, World!</h1>
+            <h1>QueueUp</h1>
             <WebPlayback token={this.state.userAccessToken} />
             <br/>
             <Search token={this.state.userAccessToken}/>
             <Queue/>
+            <NotificationContainer/>
           </div>
         }
       </div>
