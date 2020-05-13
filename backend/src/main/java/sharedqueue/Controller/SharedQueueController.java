@@ -111,5 +111,10 @@ public class SharedQueueController {
         return new ResponseEntity<>("Deleted", HttpStatus.OK);
     }
 
+    @GetMapping("/getQueues")
+    public ResponseEntity<List<SharedQueue>> getQueues() {
+        return new ResponseEntity<>(sharedQueueRepo.findAll(), HttpStatus.OK);
+    }
+
 
 }

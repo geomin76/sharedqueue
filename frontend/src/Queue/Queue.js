@@ -7,7 +7,7 @@ class Queue extends Component {
         this.state = {
             items: null,
             loading: false,
-            code: "2324 5661"
+            code: "6667 1414"
         }
     }
 

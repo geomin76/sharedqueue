@@ -40,9 +40,9 @@ class App extends Component {
       userAccessToken,
     } = this.state
 
-    // show queue on side
+    // show queue on side (figure out update, possibly update when addtoqueue, delete or element switch)
 
-    //store token better so no more logging in
+    //store token better so no more logging in (refresh token?)
 
     //figure out creating group or joining a queue
 

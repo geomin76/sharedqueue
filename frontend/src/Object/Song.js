@@ -4,7 +4,7 @@ import { NotificationManager } from 'react-notifications'
 
 
 function addToQueue(name, songId, suggestedBy, img) {
-    var url = "http://localhost:8080/api/addToQueue?code=2324%205661"
+    var url = "http://localhost:8080/api/addToQueue?code=6667%201414"
     const data = {
         name: name,
         songId: songId,
